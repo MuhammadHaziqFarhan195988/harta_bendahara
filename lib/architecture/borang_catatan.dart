@@ -60,79 +60,85 @@ else {
 
   @override
   Widget build(BuildContext context) {
-    return  Padding(
-      padding: const  EdgeInsets.fromLTRB(16, 48, 16,16),
-      child: Column( //based on the form structure
-        children: [
-          TextField(
-          controller: _textController,
-            maxLength: 50,
-           decoration: const InputDecoration(
-            label: Text("Item"),
-           ),
-          ),
-          const SizedBox(height: 2,),
-          Row(
+    final keyboardSpace = MediaQuery.of(context).viewInsets.bottom;
+    return  SizedBox(
+      height: double.infinity,
+      child: SingleChildScrollView(
+        child: Padding(
+          padding:   EdgeInsets.fromLTRB(16, 48, 16, keyboardSpace + 16),
+          child: Column( //based on the form structure
             children: [
-          
-          Expanded(
-            child: TextField(
-              controller: _decimalController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(
-                prefixText: "RM: ",
-                label: Text("Jumlah"),
+              TextField(
+              controller: _textController,
+                maxLength: 50,
+               decoration: const InputDecoration(
+                label: Text("Item"),
+               ),
               ),
-          
-            ),
-          ),
-         const  SizedBox(width: 16,),
-          Expanded (
-         child: Row(
-          mainAxisAlignment: MainAxisAlignment.end, //basically we tell dart to put the widget of the rightmost side of the screen
-          crossAxisAlignment: CrossAxisAlignment.center, // basically we tell dart to put the widget in the center vertically
-          children: [
-            Text(_savedDate == null ? "No date selected" : formatter.format(_savedDate!)),
-            IconButton(onPressed: _inputDate, icon: const Icon(Icons.calendar_month))
-          ],
-          ),
-          )
-
-
-
-     ], 
-  ),
-  const SizedBox(height: 15,),
-          Row(
-            children: [
-
-              DropdownButton(
-                value: _categorySelect,
-                items: Category.values.map((category) => 
-              DropdownMenuItem(
-                value: category,
-                child: Text(category.name.toUpperCase()),
-                
-                 ),).toList(), 
-                 
-                 onChanged: (value) {
-                        if(value == null){
-                            return;
-                        }           
-setState(() {
- 
-  _categorySelect = value;
-});
-
-
-              }
+              const SizedBox(height: 2,),
+              Row(
+                children: [
+              
+              Expanded(
+                child: TextField(
+                  controller: _decimalController,
+                  keyboardType: TextInputType.number,
+                  decoration: const InputDecoration(
+                    prefixText: "RM: ",
+                    label: Text("Jumlah"),
+                  ),
+              
+                ),
               ),
-              const Spacer(),
-              ElevatedButton(onPressed: _checkErrorBeforeSubmit, child: const Text("Simpan Catatan")),
-              TextButton(onPressed: () { Navigator.pop(context);},child: const Text("batal")),
+             const  SizedBox(width: 16,),
+              Expanded (
+             child: Row(
+              mainAxisAlignment: MainAxisAlignment.end, //basically we tell dart to put the widget of the rightmost side of the screen
+              crossAxisAlignment: CrossAxisAlignment.center, // basically we tell dart to put the widget in the center vertically
+              children: [
+                Text(_savedDate == null ? "No date selected" : formatter.format(_savedDate!)),
+                IconButton(onPressed: _inputDate, icon: const Icon(Icons.calendar_month))
+              ],
+              ),
+              )
+        
+        
+        
+         ], 
+          ),
+          const SizedBox(height: 15,),
+              Row(
+                children: [
+        
+                  DropdownButton(
+                    value: _categorySelect,
+                    items: Category.values.map((category) => 
+                  DropdownMenuItem(
+                    value: category,
+                    child: Text(category.name.toUpperCase()),
+                    
+                     ),).toList(), 
+                     
+                     onChanged: (value) {
+                            if(value == null){
+                                return;
+                            }           
+        setState(() {
+         
+          _categorySelect = value;
+        });
+        
+        
+                  }
+                  ),
+                  const Spacer(),
+                  ElevatedButton(onPressed: _checkErrorBeforeSubmit, child: const Text("Simpan Catatan")),
+                  TextButton(onPressed: () { Navigator.pop(context);},child: const Text("batal")),
+                ],
+              )
             ],
-          )
-        ],
+          ),
+        ),
       ),
     );
   }

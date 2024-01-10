@@ -5,7 +5,7 @@ import 'package:harta_bendahara/model/catatan.dart';
 class SenaraiCatatan extends StatelessWidget {
    const SenaraiCatatan({super.key, required this.inputCatatan, required this.deleteCatatan});
  final List<Catatan> inputCatatan;
- final void Function(Catatan catatan) deleteCatatan;
+ final void Function(Catatan catatan) deleteCatatan; //we use this datatype to accept a function which got pass by the parent widget
 
   @override
   Widget build(BuildContext context) {

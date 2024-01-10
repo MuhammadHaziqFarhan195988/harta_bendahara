@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 import 'package:harta_bendahara/architecture/dashboard.dart';
 
@@ -11,7 +12,12 @@ brightness: Brightness.dark,
   );
 
 void main() {
-  runApp(
+  // WidgetsFlutterBinding.ensureInitialized();
+  // SystemChrome.setPreferredOrientations([
+  //   DeviceOrientation.portraitUp,
+
+  // ]).then((orientationScreen) {
+runApp(
      MaterialApp(
       darkTheme: ThemeData.dark().copyWith(
         colorScheme: kDarkColorScheme,
@@ -50,4 +56,7 @@ void main() {
       home:const Dashboard(),
     ),
   );
+
+  // } );
+  
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:harta_bendahara/architecture/borang_catatan.dart';
+import 'package:harta_bendahara/architecture/chart/chart.dart';
 import 'package:harta_bendahara/model/catatan.dart';
 import 'package:harta_bendahara/architecture/senarai/senarai_catatan.dart';
 
@@ -63,7 +64,10 @@ void _deleteCatatan(Catatan catatan){
 
   @override
   Widget build(BuildContext context) {
+   final width = MediaQuery.of(context).size.width;
+    
     return Scaffold(
+      resizeToAvoidBottomInset : false,
       appBar: AppBar(
         
         actions: [
@@ -73,9 +77,9 @@ void _deleteCatatan(Catatan catatan){
           "Catatan Bendahara",
         ),
       ),
-      body:   Column(
+      body: width < 600 ?  Column(
         children: [
-          const Text("Expense chart"), //another widget file for these
+          Chart(belanja: _inputCatatan), //chart.dart
           Expanded(
             child: _inputCatatan.isNotEmpty ?
             SenaraiCatatan(
@@ -86,7 +90,17 @@ void _deleteCatatan(Catatan catatan){
               ), 
               
         ],
-      ),
+      ) : Row(children: [
+          Expanded(child: Chart(belanja: _inputCatatan)), //chart.dart
+          Expanded(
+            child: _inputCatatan.isNotEmpty ?
+            SenaraiCatatan(
+              inputCatatan: _inputCatatan,
+              deleteCatatan: _deleteCatatan,
+              ) :
+             const Center(child:  Text("Whoosh did you heard that tumbleweed?")), // if there is not list then run this line
+              ), 
+      ]),
     );
   }
 }
