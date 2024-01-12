@@ -29,7 +29,9 @@ class _DashboardState extends State<Dashboard> {
 
 void _addCatatan(){
 showModalBottomSheet(
+  useSafeArea: true,
   isScrollControlled: true,
+  constraints: BoxConstraints(minWidth: 0,maxWidth: MediaQuery.of(context).size.width), 
   context: context,
   builder: (ctx) =>  BorangCatatan(inputCatatan: _saveCatatan,));
 
